@@ -5,7 +5,7 @@ local name = "/mnt/2b7/"..tostring(os.time())
 
 modem.open(321)
 
-local file = io.open(name, "rw")
+local file = io.open(name, "a[b]")
 
 local returned = file:read("*a")
 print(returned)
