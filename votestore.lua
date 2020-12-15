@@ -6,9 +6,9 @@ local name = "/mnt/2b7/"..tostring(os.time())
 modem.open(321)
 
 local file = io.open(name, "a")
+io.output(file):write("dadaw")
 
 local returned = file:read("*a")
-print(returned)
 
 local Coroutine = coroutine.create(function()
 
