@@ -263,7 +263,7 @@ for _,v in pairs(states) do
     local base = "https://raw.githubusercontent.com/Testure/OCFiles/main/"
     for i = 1,4 do
         local color = (i == 1 and "-red" or i == 2 and "-yellow" or i == 3 and "-mix") or "-grey"
-        os.execute("/bin/wget", base..v..color)
+        os.execute("/bin/wget", "-q",  base..v..color, v..color..".ctif")
     end
 end
 
