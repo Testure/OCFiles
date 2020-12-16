@@ -254,16 +254,13 @@ local states = {
   "Orbis",
   "North",
   "South",
-  "West",
-  "Maxwell",
-  "NorthMaxwell"
 }
 
 for _,v in pairs(states) do
     local base = "https://raw.githubusercontent.com/Testure/OCFiles/main/"
     for i = 1,4 do
-        local color = (i == 1 and "-red" or i == 2 and "-yellow" or i == 3 and "-mix") or "-grey"
-        os.execute("/bin/wget ".."-q "..base..v..color.." "..v..color..".ctif")
+        local color = (i == 1 and "-Red" or i == 2 and "-Yellow" or i == 3 and "-Mix") or "-Grey"
+        os.execute("/bin/wget ".."-q "..base..v..color..".ctif "..v..color..".ctif")
     end
 end
 

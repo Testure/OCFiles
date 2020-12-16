@@ -8,16 +8,16 @@ modem.open(321)
 modem.open(123)
 
 local states = {
-  ["Ampere"] = {house = {r = 0, y = 0}, president = "y"},
-  ["Fermi"] = {house = {r = 0, y = 0}, president = "r"},
-  ["Aquae"] = {house = {r = 0, y = 0}, president = "r"},
-  ["Arbor"] = {house = {r = 0, y = 0}, president = "y"},
-  ["Orbis"] = {house = {r = 0, y = 0}, president = "y"},
-  ["North"] = {house = {r = 0, y = 0}, president = "r"},
-  ["South"] = {house = {r = 0, y = 0}, president = "r"},
-  ["West"] = {house = {r = 0, y = 0}, president = "y"},
-  ["Maxwell"] = {house = {r = 0, y = 0}, president = "y"},
-  ["NorthMaxwell"] = {house = {r = 0, y = 0}, president = "y"}
+  ["Ampere"] = {house = {r = 0, y = 0}, president = "g"},
+  ["Fermi"] = {house = {r = 0, y = 0}, president = "g"},
+  ["Aquae"] = {house = {r = 0, y = 0}, president = "g"},
+  ["Arbor"] = {house = {r = 0, y = 0}, president = "g"},
+  ["Orbis"] = {house = {r = 0, y = 0}, president = "g"},
+  ["North"] = {house = {r = 0, y = 0}, president = "g"},
+  ["South"] = {house = {r = 0, y = 0}, president = "g"},
+  ["West"] = {house = {r = 0, y = 0}, president = "g"},
+  ["Maxwell"] = {house = {r = 0, y = 0}, president = "g"},
+  ["NorthMaxwell"] = {house = {r = 0, y = 0}, president = "g"}
 }
 
 function Process(message, toget, from)
@@ -32,16 +32,7 @@ function Process(message, toget, from)
         return os.exit()
     end
     if message == "get" then
-        local file = io.open(name..toget, "r")
-        local lines = {}
-        local string = ""
-        for line in io.lines(name..toget) do
-            table.insert(lines, line)
-        end
-        for _,v in pairs(lines) do
-            string = string..tostring(v)
-        end
-        file:close()
+        local string = string.format("%d/%d %s", states[toget].house.r, states[toget].house.y, states[toget].president)
         modem.send(from, 123, string)
         print("processed request to get state info")
         return
