@@ -246,6 +246,27 @@ function drawImage(data, offx, offy)
   end
 end
 
+local states = {
+  "Ampere",
+  "Fermi",
+  "Aquae",
+  "Arbor",
+  "Orbis",
+  "North",
+  "South",
+  "West",
+  "Maxwell",
+  "NorthMaxwell"
+}
+
+for _,v in pairs(states) do
+    local base = "https://raw.githubusercontent.com/Testure/OCFiles/main/"
+    for i = 1,4 do
+        local color = (i == 1 and "-red" or i == 2 and "-yellow" or i == 3 and "-mix") or "-grey"
+        os.execute("/bin/wget", base..v..color)
+    end
+end
+
 while true do
     local _, _, _, port, _, message = event.pull("modem_message")
     gpu.setBackground(0, false)
