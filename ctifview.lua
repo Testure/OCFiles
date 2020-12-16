@@ -21,7 +21,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ]]
 
-local args = {...}
 local component = require("component")
 local event = require("event")
 local gpu = component.gpu
@@ -29,7 +28,10 @@ local unicode = require("unicode")
 local keyboard = require("keyboard")
 local text = require("text")
 local os = require("os")
+local modem = component.modem
 local pal = {}
+
+modem.open(456)
 
 local q = {}
 for i=0,255 do
@@ -244,17 +246,14 @@ function drawImage(data, offx, offy)
   end
 end
 
-local image = loadImage(args[1])
-drawImage(image)
-
 while true do
-    local name,addr,char,key,player = event.pull("key_down")
-    if key == 0x10 then
-        break
+    local _, _, _, port, _, message = event.pull("modem_message")
+    gpu.setBackground(0, false)
+    gpu.setForeground(16777215, false)
+    gpu.setResolution(80, 25)
+    gpu.fill(1, 1, 80, 25, " ")
+    if port == 456 then
+      local image = loadImage(message)
+      drawImage(image)
     end
 end
-
-gpu.setBackground(0, false)
-gpu.setForeground(16777215, false)
-gpu.setResolution(80, 25)
-gpu.fill(1, 1, 80, 25, " ")
